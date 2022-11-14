@@ -5,6 +5,8 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:quiz_app/pages.dart';
 import 'package:quiz_app/profile.dart';
 
+import 'home.dart';
+
 class Bottom_bar extends StatefulWidget {
   const Bottom_bar({super.key});
 
