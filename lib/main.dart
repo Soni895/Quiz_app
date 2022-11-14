@@ -8,7 +8,6 @@ void main() {
     MaterialApp(
       title: "introduction App",
       home: Bottom_bar(),
-      // home: Quiz_app(),
       theme: ThemeData(
         brightness: Brightness.light,
         // primarySwatch: Colors.pink,

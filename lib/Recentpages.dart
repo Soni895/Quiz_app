@@ -11,6 +11,7 @@ class _RecentState extends State<Recentpages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Center(
         child: Text("i am chrome"),
       ),

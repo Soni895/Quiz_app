@@ -1,14 +1,14 @@
 // import 'package:flutter/material.dart';
 // import 'package:quiz_view/quiz_view.dart';
 
-// class Quiz_app extends StatefulWidget {
-//   const Quiz_app({super.key});
+// class Home extends StatefulWidget {
+//   const Home({super.key});
 
 //   @override
-//   State<Quiz_app> createState() => _Quiz_appState();
+//   State<Home> createState() => _Quiz_appState();
 // }
 
-// class _Quiz_appState extends State<Quiz_app> {
+// class _Quiz_appState extends State<Home> {
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
