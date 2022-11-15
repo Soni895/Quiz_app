@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
+  @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
   bool isChecked = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,21 +47,21 @@ class Profile extends StatelessWidget {
                   ),
                 ),
 
-                //  check box;
-                // Checkbox(
-                //   value: isChecked,
-                //   onChanged: (value) {
-                //     if (isChecked == true) {
-                //       (() {
-                //         isChecked = false;
-                //       });
-                //     } else {
-                //       setState(() {
-                //         isChecked = true;
-                //       });
-                //     }
-                //   },
-                // ),
+                //   check box;
+                Checkbox(
+                  value: isChecked,
+                  onChanged: (value) {
+                    if (isChecked == true) {
+                      (() {
+                        isChecked = false;
+                      });
+                    } else {
+                      setState(() {
+                        isChecked = true;
+                      });
+                    }
+                  },
+                ),
                 ElevatedButton(
                   child: Text("More"),
                   onPressed: () {

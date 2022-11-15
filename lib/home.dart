@@ -99,7 +99,7 @@ class _Quiz_appState extends State<Home> {
       String quet,
       String que,
       String ans,
-      List<String> lans}) {
+      List<String>? lans}) {
     return QuizView(
       questionTag: quet,
       questionColor: Colors.redAccent.shade700,
