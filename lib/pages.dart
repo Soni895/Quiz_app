@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'Recentpages.dart';
 
@@ -31,12 +32,22 @@ class Search extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: ((context) => Recentpages())));
+            // Navigator.push(context,
+            //     MaterialPageRoute(builder: ((context) => Recentpages())));
+            _launchURLApp();
           },
           child: Text('open chrome'),
         ),
       ),
     );
+  }
+}
+
+_launchURLApp() async {
+  var url = Uri.parse("https://www.google.co.in/");
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }

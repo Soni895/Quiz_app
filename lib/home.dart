@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_view/quiz_view.dart';
+import 'package:quiz_app/question.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -9,6 +9,11 @@ class Home extends StatefulWidget {
 }
 
 class _Quiz_appState extends State<Home> {
+  List<Question> questionList = getQuestions();
+  int currentQuestionIndex = 0;
+  int score = 0;
+  Answer? selectedAnswer;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,100 +41,139 @@ class _Quiz_appState extends State<Home> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              quiz(
-                context: context,
-                quet: 'Question 1',
-                que: " Identify the incorrect constructor type?",
-                ans: "Friend",
-                lans: ['Copy', 'Default', 'Parameterized'],
-              ),
-              Divider(
-                height: 25,
-              ),
-              quiz(
-                context: context,
-                quet: 'Question 2',
-                que: "C++ uses which approach??",
-                ans: "Bottom-Up",
-                lans: ['Left-Right', 'Right-Left', 'Top-Down'],
-              ),
-              Divider(
-                height: 25,
-              ),
-              quiz(
-                context: context,
-                quet: 'Question 3',
-                que: "Identify the correct syntax for declaring arrays in C++.",
-                ans: "int arr[10]",
-                lans: ['array arr[100]', 'array[10]', 'int arr'],
-              ),
-              Divider(
-                height: 25,
-              ),
-              quiz(
-                context: context,
-                quet: 'Question 4',
-                que: "Which of the following is “address of operator ?",
-                ans: "&",
-                lans: ['*', '&&', '[]'],
-              ),
-              Divider(
-                height: 25,
-              ),
-              quiz(
-                context: context,
-                quet: 'Question 5',
-                que: "Identify the correct example for a pre-increment operato",
-                ans: "++n",
-                lans: ['n--', 'n++', '++n'],
-              ),
-            ],
+      body: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+        child:
+            Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          Text(
+            "Simple Quiz",
+            style: TextStyle(color: Colors.white),
           ),
-        ),
+          _questionWidget(),
+          _answerList(),
+          _nextButton(),
+        ]),
       ),
     );
   }
 
-  QuizView quiz(
-      {BuildContext context,
-      String quet,
-      String que,
-      String ans,
-      List<String>? lans}) {
-    return QuizView(
-      questionTag: quet,
-      questionColor: Colors.redAccent.shade700,
-      tagColor: Colors.black54,
-      backgroundColor: Colors.white70,
-      tagBackgroundColor: Color(0xffF1CDC5),
-      answerBackgroundColor: Color(0xffA39E9D),
-      question: que,
-      height: 500,
-      width: 350,
-      rightAnswer: ans,
-      wrongAnswers: lans,
-      onRightAnswer: () {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text("Correct!"),
-              );
+  _questionWidget() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Question ${currentQuestionIndex + 1}/${questionList.length.toString()}",
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        SizedBox(height: 20),
+        Container(
+          width: double.infinity,
+          alignment: Alignment.center,
+          padding: const EdgeInsets.all(32),
+          decoration: BoxDecoration(
+            color: Colors.orangeAccent,
+            borderRadius: BorderRadius.circular(40),
+          ),
+          child: Text(
+            questionList[currentQuestionIndex].questionText,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  _answerList() {
+    return Column(
+      children: questionList[currentQuestionIndex]
+          .answersList
+          .map(
+            (e) => _answerButton(e),
+          )
+          .toList(),
+    );
+  }
+
+  Widget _answerButton(Answer answer) {
+    bool isSelected = answer == selectedAnswer;
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      height: 48,
+      child: ElevatedButton(
+        child: Text(answer.answerText),
+        style: ElevatedButton.styleFrom(
+          shape: const StadiumBorder(),
+          primary: isSelected ? Colors.orangeAccent : Colors.white,
+          onPrimary: Colors.black,
+        ),
+        onPressed: () {
+          if (selectedAnswer == null) {
+            if (answer.isCorrect) {
+              score++;
+            }
+          }
+          setState(() {
+            selectedAnswer = answer;
+          });
+        },
+      ),
+    );
+  }
+
+  _nextButton() {
+    bool isLastQuestion = false;
+    if (currentQuestionIndex == questionList.length - 1) {
+      isLastQuestion = true;
+    }
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.5,
+      height: 48,
+      child: ElevatedButton(
+        child: Text(isLastQuestion ? "Submit" : "Next"),
+        style: ElevatedButton.styleFrom(
+          shape: const StadiumBorder(),
+          primary: Colors.blueAccent,
+          onPrimary: Colors.white,
+        ),
+        onPressed: () {
+          if (isLastQuestion) {
+            //display score
+            showDialog(context: context, builder: (_) => _showScore());
+          } else {
+            setState(() {
+              selectedAnswer = null;
+              currentQuestionIndex++;
             });
-      },
-      onWrongAnswer: () {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text("Wrong!"),
-              );
-            });
-      },
+          }
+        },
+      ),
+    );
+  }
+
+  _showScore() {
+    return AlertDialog(
+      title: Text(score.toString()),
+      content: ElevatedButton(
+        child: const Text("Try Again"),
+        onPressed: () {
+          Navigator.pop(context);
+          setState(() {
+            currentQuestionIndex = 0;
+            score = 0;
+            selectedAnswer = null;
+          });
+        },
+      ),
     );
   }
 }
