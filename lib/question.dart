@@ -15,23 +15,36 @@ class Answer {
 List<Question> getQuestions() {
   List<Question> list = [];
   //adding questions
-  list.add(Question("Who is owner of Flutter?", [
-    Answer("Nokia", false),
-    Answer("Google", true),
-    Answer("Microsoft", false),
-    Answer("Meta", false),
+  list.add(Question("C++ uses which approach?", [
+    Answer("Right-Reft", false),
+    Answer("Bottom-Up", true),
+    Answer("Top-Down", false),
+    Answer("Left-Right", false),
   ]));
-  list.add(Question("Who is owner of Iphone?", [
-    Answer("Nokia", false),
-    Answer("Google", false),
-    Answer("Microsoft", false),
-    Answer("Apple", true),
+  list.add(
+      Question("Identify the correct syntax for declaring arrays in C++?", [
+    Answer("array arr[10]", false),
+    Answer("array{10}", false),
+    Answer("int arr[10]", true),
+    Answer("int arr", false),
   ]));
-  list.add(Question("Who is owner of Vs code?", [
-    Answer("Nokia", false),
-    Answer("Google", false),
-    Answer("Microsoft", true),
-    Answer("Meta", false),
+  list.add(Question("Which of the following is “address of operator", [
+    Answer("*", false),
+    Answer("[]", false),
+    Answer("&", true),
+    Answer("&&", false),
+  ]));
+  list.add(Question("Identify the scope resolution operato", [
+    Answer(":", false),
+    Answer("?", false),
+    Answer("::", true),
+    Answer("None", false),
+  ]));
+  list.add(Question("hich of the following loops is best when we know the", [
+    Answer("While loop", false),
+    Answer("Do while", false),
+    Answer("For loop", true),
+    Answer("All of above", false),
   ]));
   return list;
 }

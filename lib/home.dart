@@ -45,10 +45,6 @@ class _Quiz_appState extends State<Home> {
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-          Text(
-            "Simple Quiz",
-            style: TextStyle(color: Colors.white),
-          ),
           _questionWidget(),
           _answerList(),
           _nextButton(),
@@ -76,7 +72,7 @@ class _Quiz_appState extends State<Home> {
           alignment: Alignment.center,
           padding: const EdgeInsets.all(32),
           decoration: BoxDecoration(
-            color: Colors.orangeAccent,
+            color: Colors.black,
             borderRadius: BorderRadius.circular(40),
           ),
           child: Text(
@@ -113,7 +109,7 @@ class _Quiz_appState extends State<Home> {
         child: Text(answer.answerText),
         style: ElevatedButton.styleFrom(
           shape: const StadiumBorder(),
-          primary: isSelected ? Colors.orangeAccent : Colors.white,
+          primary: isSelected ? Colors.white : Colors.white,
           onPrimary: Colors.black,
         ),
         onPressed: () {
@@ -142,7 +138,7 @@ class _Quiz_appState extends State<Home> {
         child: Text(isLastQuestion ? "Submit" : "Next"),
         style: ElevatedButton.styleFrom(
           shape: const StadiumBorder(),
-          primary: Colors.blueAccent,
+          primary: Colors.black,
           onPrimary: Colors.white,
         ),
         onPressed: () {
@@ -162,9 +158,9 @@ class _Quiz_appState extends State<Home> {
 
   _showScore() {
     return AlertDialog(
-      title: Text(score.toString()),
+      title: Center(child: Text("your score $score")),
       content: ElevatedButton(
-        child: const Text("Try Again"),
+        child: Text("Finish."),
         onPressed: () {
           Navigator.pop(context);
           setState(() {
