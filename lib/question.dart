@@ -28,13 +28,13 @@ List<Question> getQuestions() {
     Answer("int arr[10]", true),
     Answer("int arr", false),
   ]));
-  list.add(Question("Which of the following is “address of operator", [
+  list.add(Question("Which of the following is " "addres" "of operator", [
     Answer("*", false),
     Answer("[]", false),
     Answer("&", true),
     Answer("&&", false),
   ]));
-  list.add(Question("Identify the scope resolution operato", [
+  list.add(Question("Identify the scope resolution operator", [
     Answer(":", false),
     Answer("?", false),
     Answer("::", true),

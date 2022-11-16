@@ -109,7 +109,7 @@ class _Quiz_appState extends State<Home> {
         child: Text(answer.answerText),
         style: ElevatedButton.styleFrom(
           shape: const StadiumBorder(),
-          primary: isSelected ? Colors.white : Colors.white,
+          primary: isSelected ? Colors.blue : Colors.white,
           onPrimary: Colors.black,
         ),
         onPressed: () {
