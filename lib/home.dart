@@ -56,7 +56,7 @@ class _Quiz_appState extends State<Home> {
   _questionWidget() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
           "Question ${currentQuestionIndex + 1}/${questionList.length.toString()}",
@@ -135,9 +135,12 @@ class _Quiz_appState extends State<Home> {
       width: MediaQuery.of(context).size.width * 0.5,
       height: 48,
       child: ElevatedButton(
-        child: Text(isLastQuestion ? "Submit" : "Next"),
+        child: Text(
+          isLastQuestion ? "Submit" : "Next",
+          style: TextStyle(fontSize: 20),
+        ),
         style: ElevatedButton.styleFrom(
-          shape: const StadiumBorder(),
+          shape: StadiumBorder(),
           primary: Colors.black,
           onPrimary: Colors.white,
         ),
