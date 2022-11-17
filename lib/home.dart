@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/next.dart';
 import 'package:quiz_app/question.dart';
 
 class Home extends StatefulWidget {
@@ -146,8 +147,16 @@ class _Quiz_appState extends State<Home> {
         ),
         onPressed: () {
           if (isLastQuestion) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (builder) => Next(
+                  score: score,
+                ),
+              ),
+            );
+
             //display score
-            showDialog(context: context, builder: (_) => _showScore());
+            //showDialog(context: context, builder: (_) => _showScore());
           } else {
             setState(() {
               selectedAnswer = null;

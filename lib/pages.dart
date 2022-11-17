@@ -34,7 +34,8 @@ class Search extends StatelessWidget {
           onPressed: () {
             // Navigator.push(context,
             //     MaterialPageRoute(builder: ((context) => Recentpages())));
-            _launchURLApp();
+            // _launchURLApp();
+            _launchUrl();
           },
           child: Text('open chrome'),
         ),
@@ -43,11 +44,18 @@ class Search extends StatelessWidget {
   }
 }
 
-_launchURLApp() async {
-  var url = Uri.parse("https://www.google.co.in/");
-  if (await canLaunchUrl(url)) {
-    await launchUrl(url);
-  } else {
-    throw 'Could not launch $url';
+// _launchURLApp() async {
+//   var url = Uri.parse("https://www.amazon.in/");
+//   if (await canLaunchUrl(url)) {
+//     var bool = await launchUrl(url);
+//   } else {
+//     throw 'Could not launch $url';
+//   }
+// }
+final Uri _url = Uri.parse('https://www.amazon.in/');
+
+Future<void> _launchUrl() async {
+  if (!await launchUrl(_url)) {
+    throw 'Could not launch $_url';
   }
 }
