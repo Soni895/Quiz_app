@@ -12,10 +12,10 @@ class splash extends StatefulWidget {
 class _splashState extends State<splash> {
   void initState() {
     super.initState();
-    _navigatetohome();
+    navigatetohome();
   }
 
-  _navigatetohome() async {
+  navigatetohome() async {
     await Future.delayed(
       Duration(milliseconds: 5000),
       () {},

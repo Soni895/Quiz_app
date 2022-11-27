@@ -7,7 +7,7 @@ class Next extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text("congratulation your score is ${score}"),
+        child: Text("congratulation your score is $score"),
       ),
     );
   }

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'App_state.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -10,6 +13,7 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    //AppState provider = Provider.of<AppState>(context);
     return Scaffold(
       backgroundColor: Colors.blueAccent,
       appBar: AppBar(
@@ -39,13 +43,48 @@ class _ProfileState extends State<Profile> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: "enter your name",
-                      labelText: "Name",
-                    ),
+                  //child: ChangeNotifierProvider<AppState>(
+                  //create: (context) => AppState(),
+                  child: Consumer<AppState>(
+                    builder: (context, provider, child) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            provider.message.toString(),
+                            style: TextStyle(
+                              color: (provider.eligible == true)
+                                  ? Colors.green
+                                  : Colors.red,
+                            ),
+                          ),
+                          TextField(
+                            decoration: InputDecoration(
+                              hintText: "enter your name",
+                              labelText: "Name",
+                            ),
+                            onChanged: (value) {
+                              int val = value.length;
+                              provider.check(val);
+                            },
+                          ),
+                        ],
+                      );
+                    },
                   ),
+                  // TextField(
+                  //   decoration: InputDecoration(
+                  //     hintText: "enter your name",
+                  //     labelText: "Name",
+                  //   ),
+                  // ),
                 ),
+                //  TextField(
+                //   decoration: InputDecoration(
+                //     hintText: "enter your name",
+                //     labelText: "Name",
+                //   ),
+                // ),
 
                 //   check box;
                 Checkbox(

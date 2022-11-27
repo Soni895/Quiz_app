@@ -1,4 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:quiz_app/App_state.dart';
+import 'package:quiz_app/provider_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'Recentpages.dart';
@@ -17,9 +21,41 @@ import 'Recentpages.dart';
 class Recent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    AppState provider = Provider.of<AppState>(context);
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.update),
+        onPressed: () {
+          provider.update();
+        },
+        backgroundColor: Colors.black,
+      ),
       body: Center(
-        child: Text("i am recent"),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            //provider.change ? first() : second(),
+            Text(
+              " value ${provider.start}",
+              style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            CupertinoButton(
+                color: Colors.black,
+                child: Text("press"),
+                onPressed: (() {
+                  // provider.check(100);
+                  provider.getTimer();
+                }))
+            //Text(" value ${provider.temp}"),
+          ],
+        ),
       ),
     );
   }
@@ -35,6 +71,7 @@ class Search extends StatelessWidget {
             // Navigator.push(context,
             //     MaterialPageRoute(builder: ((context) => Recentpages())));
             // _launchURLApp();
+
             _launchUrl();
           },
           child: Text('open chrome'),
