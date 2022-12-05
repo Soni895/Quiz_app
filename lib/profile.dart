@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quiz_app/parallax.dart';
 
 import 'App_state.dart';
 
@@ -117,8 +118,14 @@ class _ProfileState extends State<Profile> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               ListTile(
-                                leading: Icon(Icons.share),
-                                title: Text('Share'),
+                                leading: Icon(Icons.upcoming),
+                                title: Text('parallex effect'),
+                                onTap: (() {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: ((context) => parallax())));
+                                }),
                               ),
                               ListTile(
                                 leading: Icon(Icons.link),
